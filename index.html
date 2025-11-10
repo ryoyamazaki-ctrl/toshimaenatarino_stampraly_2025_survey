@@ -5,24 +5,36 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>としまえんあたりのスタンプラリーご参加後アンケート</title>
 <style>
-  body{font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN",Meiryo,Roboto,Segoe UI,sans-serif;line-height:1.7;margin:0;background:#f7f7fa;color:#222}
-  .container{max-width:900px;margin:24px auto;padding:16px}
-  .card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.05);padding:20px}
-  h1{font-size:clamp(20px,3.2vw,28px);margin:0 0 16px}
-  h2{font-size:18px;margin:18px 0 8px}
-  fieldset{border:none;margin:0 0 16px;padding:0}
-  .row{margin:6px 0}
-  .help{font-size:12px;color:#666}
-  .error{margin-top:8px;color:#b00020}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px}
-  .footer{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap}
-  button{appearance:none;border:0;background:#2563eb;color:#fff;border-radius:8px;padding:10px 16px;font-weight:600;cursor:pointer}
-  button[disabled]{opacity:.6;cursor:not-allowed}
-  .btn-secondary{background:#6b7280}
-  .alert{background:#eef5ff;border:1px solid #cfe0ff;border-radius:10px;padding:14px;margin:12px 0}
-  .hide{display:none !important}
-  .required::after{content:" *";color:#b00020}
-  .checkgroup{max-height:320px;overflow:auto;border:1px solid #e5e7eb;border-radius:8px;padding:8px;background:#fafafa}
+body {
+  font-family: system-ui,-apple-system,"Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
+  margin: 0; background: #f8fafc; color: #222;
+}
+.container {
+  max-width: 900px; margin: 24px auto; padding: 16px;
+}
+.card {
+  background: #fff; border-radius: 12px; padding: 24px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+h1 { font-size: 24px; margin-bottom: 20px; }
+h2 { font-size: 18px; margin: 20px 0 8px; }
+fieldset { border: none; margin: 0 0 16px; padding: 0; }
+.grid {
+  display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+  gap: 8px;
+}
+.help { font-size: 12px; color: #666; }
+.error { color: #b00020; margin-top: 10px; }
+button {
+  background: #2563eb; color: white; border: none; border-radius: 6px;
+  padding: 10px 16px; font-weight: 600; cursor: pointer;
+}
+button[disabled]{opacity: .6; cursor:not-allowed;}
+.btn-secondary { background: #6b7280; }
+.alert { background: #eef5ff; border: 1px solid #cfe0ff; border-radius: 8px; padding: 14px; margin: 10px 0; }
+.hide { display: none !important; }
+.checkgroup { max-height: 300px; overflow: auto; border: 1px solid #ddd; padding: 8px; border-radius: 8px; background: #fafafa; }
+.required::after { content: " *"; color: #b00020; }
 </style>
 </head>
 <body>
@@ -30,278 +42,197 @@
   <div class="card">
     <h1>としまえんあたりのスタンプラリーご参加後アンケート</h1>
 
-    <!-- フォーム画面 -->
+    <!-- ▼アンケートフォーム -->
     <div id="formView">
       <form id="surveyForm" novalidate>
-        <!-- Q1 -->
         <fieldset>
           <h2 class="required">Q1：性別</h2>
-          <div class="row">
-            <label><input type="radio" name="q1_gender" value="男性" required> 男性</label>
-          </div>
-          <div class="row">
-            <label><input type="radio" name="q1_gender" value="女性"> 女性</label>
-          </div>
-          <div class="row">
-            <label><input type="radio" name="q1_gender" value="その他"> その他</label>
-          </div>
-          <div class="row">
-            <label><input type="radio" name="q1_gender" value="不明"> 不明</label>
-          </div>
+          <label><input type="radio" name="q1_gender" value="男性" required> 男性</label><br>
+          <label><input type="radio" name="q1_gender" value="女性"> 女性</label><br>
+          <label><input type="radio" name="q1_gender" value="その他"> その他</label><br>
+          <label><input type="radio" name="q1_gender" value="不明"> 不明</label>
         </fieldset>
 
-        <!-- Q2 -->
         <fieldset>
           <h2 class="required">Q2：年代</h2>
           <div class="grid">
-            <label><input type="radio" name="q2_age" value="10代以下" required> 10代以下</label>
-            <label><input type="radio" name="q2_age" value="20代"> 20代</label>
-            <label><input type="radio" name="q2_age" value="30代"> 30代</label>
-            <label><input type="radio" name="q2_age" value="40代"> 40代</label>
-            <label><input type="radio" name="q2_age" value="50代"> 50代</label>
-            <label><input type="radio" name="q2_age" value="60代"> 60代</label>
-            <label><input type="radio" name="q2_age" value="70代以上"> 70代以上</label>
+            <label><input type="radio" name="q2_age" value="10代以下" required>10代以下</label>
+            <label><input type="radio" name="q2_age" value="20代">20代</label>
+            <label><input type="radio" name="q2_age" value="30代">30代</label>
+            <label><input type="radio" name="q2_age" value="40代">40代</label>
+            <label><input type="radio" name="q2_age" value="50代">50代</label>
+            <label><input type="radio" name="q2_age" value="60代">60代</label>
+            <label><input type="radio" name="q2_age" value="70代以上">70代以上</label>
           </div>
         </fieldset>
 
-        <!-- Q3 郵便番号 -->
         <fieldset>
           <h2 class="required">Q3：お住まいの郵便番号</h2>
-          <input id="zip" name="q3_zip" inputmode="numeric" pattern="\\d{7}" maxlength="7" minlength="7" required placeholder="例）1760001">
-          <div class="help">半角数字7桁。7桁に達したらそれ以上は入力できません。</div>
+          <input id="zip" name="q3_zip" maxlength="7" pattern="\\d{7}" required placeholder="例）1760001">
+          <div class="help">半角数字7桁</div>
         </fieldset>
 
-        <!-- Q4 -->
         <fieldset>
           <h2 class="required">Q4：お住まいの居住年数</h2>
           <div class="grid">
-            <label><input type="radio" name="q4_years" value="1年未満" required> 1年未満</label>
-            <label><input type="radio" name="q4_years" value="1年~3年未満"> 1年~3年未満</label>
-            <label><input type="radio" name="q4_years" value="3年~5年未満"> 3年~5年未満</label>
-            <label><input type="radio" name="q4_years" value="5年~10年未満"> 5年~10年未満</label>
-            <label><input type="radio" name="q4_years" value="10年~20年未満"> 10年~20年未満</label>
-            <label><input type="radio" name="q4_years" value="20年~30年未満"> 20年~30年未満</label>
-            <label><input type="radio" name="q4_years" value="30年以上"> 30年以上</label>
+            <label><input type="radio" name="q4_years" value="1年未満" required>1年未満</label>
+            <label><input type="radio" name="q4_years" value="1年~3年未満">1年~3年未満</label>
+            <label><input type="radio" name="q4_years" value="3年~5年未満">3年~5年未満</label>
+            <label><input type="radio" name="q4_years" value="5年~10年未満">5年~10年未満</label>
+            <label><input type="radio" name="q4_years" value="10年以上">10年以上</label>
           </div>
         </fieldset>
 
-        <!-- Q5 周知経路 -->
         <fieldset>
-          <h2 class="required">Q5：本スタンプラリー施策をどちらで知りましたか？</h2>
-          <div class="checkgroup">
-            <div class="grid" id="q5_group">
-              <!-- 店舗一覧（使い回し） -->
-            </div>
-          </div>
-          <input type="hidden" name="q5_source" id="q5_source" required>
-          <div class="help">ひとつ選んでください。</div>
+          <h2 class="required">Q5：本スタンプラリー施策をどこで知りましたか？</h2>
+          <div id="q5_group" class="grid"></div>
+          <input type="hidden" id="q5_source" name="q5_source" required>
         </fieldset>
 
-        <!-- Q6 初めて行った店舗（チェックボックス + 「なかった」排他）-->
         <fieldset>
-          <h2 class="required">Q6：本スタンプラリー施策を機にはじめて行った店舗はありましたか？</h2>
-          <div class="checkgroup">
-            <div class="grid" id="q6_group"></div>
-          </div>
+          <h2 class="required">Q6：はじめて行った店舗</h2>
+          <div id="q6_group" class="checkgroup"></div>
           <div class="help">「なかった」を選ぶと他は自動で無効になります。</div>
         </fieldset>
 
-        <!-- Q7 今後通いたい店舗（チェックボックス + 「なかった」排他）-->
         <fieldset>
-          <h2 class="required">Q7：本スタンプラリー施策を機に今後通いたい店舗はありましたか？</h2>
-          <div class="checkgroup">
-            <div class="grid" id="q7_group"></div>
-          </div>
+          <h2 class="required">Q7：今後通いたい店舗</h2>
+          <div id="q7_group" class="checkgroup"></div>
           <div class="help">「なかった」を選ぶと他は自動で無効になります。</div>
         </fieldset>
 
-        <!-- Q8 自由記述 -->
         <fieldset>
-          <h2>Q8：今後行われたら参加したい地域施策・イベントがあれば教えて下さい（任意）</h2>
+          <h2>Q8：今後参加したい地域施策・イベント（任意）</h2>
           <textarea name="q8_free" rows="5" placeholder="自由記述"></textarea>
         </fieldset>
 
         <div id="err" class="error"></div>
 
-        <div class="footer">
-          <button id="submitBtn" type="submit">送信する</button>
-          <button type="button" class="btn-secondary" onclick="location.reload()">入力をやり直す</button>
-        </div>
+        <button id="submitBtn" type="submit">送信する</button>
+        <button type="button" class="btn-secondary" onclick="location.reload()">入力をやり直す</button>
       </form>
       <div class="alert">※ 送信後、完了画面に回答番号が表示されます。</div>
     </div>
 
-    <!-- 完了画面 -->
+    <!-- ▼完了画面 -->
     <div id="thanksView" class="hide">
       <h2>ご回答ありがとうございました！</h2>
-      <div class="alert">
-        あなたは <b id="respNum">—</b> 番目の回答者です。
-      </div>
-      <div class="footer">
-        <button type="button" onclick="closeWindow()">ページを閉じる</button>
-      </div>
+      <div class="alert">あなたは <b id="respNum">—</b> 番目の回答者です。</div>
+      <button onclick="closeWindow()">ページを閉じる</button>
     </div>
   </div>
 </div>
 
 <script>
-/** ▼▼ 必ずあなたの googleusercontent の最終URLに差し替え ▼▼ **/
+// ★ここを差し替え：googleusercontent の最終URL
 const ENDPOINT = 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLi1TrQLUpsBR09DVv5rlJtKSVqxugtQ-B5VQcPxghKF19s0uEHVMwD1jF_LKnop8fN3iBeohaCs1zepuAb0jR9CiOEXTue_GQl10mzgi75dwSdaBcyoUHYPwOBi8oDe9i9PSyRUY1rEmZWB4Rnxw0OvCbCEUk30jiHNw8b-sPjXizU9xr_GUBdQstQqY-SOwexp_dZDvNIzNGE8QTRMSRBbJp-jgVZMFpxACwJe-6HkfubV2fedcZMlKYnQOsoTbBn13mLkzFGuBDnuWLk9Aju_QckjdJlhK7sslw1Lw85D9jMTENU&lib=MyZphAQ8ILK4SXivHuEv2PojldFBKTi0l';
-/** ▲▲ ここだけ置き換え ▲▲ **/
 
-// --- 店舗リスト（Q5/6/7 で共通） ---
+// 店舗リスト
 const SHOPS = [
-  'gak','瀬戸田レモンと肉巻き野菜串 NERIMARU','木の実植物店','食堂まほろ','シリウスラボ','セブンイレブン春日町5丁目店','コンビニエンスストア髙橋','わだぱん','佃宝 本店','志村電機珈琲焙煎所','手打ちそばと酒肴 いちだい','練馬城址公園','Bis','トシママンガスタンド','スタジオツアー東京','SNIP*SNIP','titi cafe','豊島園 庭の湯','バールウギャッデ','としまえん 多喜','日本酒処 はち屋','笑天やきとり 一輝','練馬区立 向山庭園','タッポスト チャオラ','夢民家','兄弟チキン','亀寿司','BBQ Records','カーサ・デル・ヴィアッジアトーレ','豊島園の夕陽','111','THE GIANT STEP','アーバンオアシス タナカ','デュアン漢方薬局','かすたねっと','口水食堂','猫カフェ えこねこ','metro dinner.','その他店舗・施設'
+  'SNIP*SNIP','バールウギャッデ','笑天やきとり 一輝','夢民家','BBQ Records','111','デュアン漢方薬局',
+  '猫カフェ えこねこ','titi cafe','としまえん 多喜','練馬区立 向山庭園','兄弟チキン','カーサ・デル・ヴィアッジアトーレ',
+  'THE GIANT STEP','かすたねっと','豊島園 庭の湯','日本酒処 はち屋','タッポスト チャオラ','亀寿司','豊島園の夕陽',
+  'アーバンオアシス タナカ','口水食堂','metro dinner.','その他店舗・施設','なかった'
 ];
 
-function el(tag, props={}, children=[]){
-  const e=document.createElement(tag);
-  Object.entries(props).forEach(([k,v])=>{
-    if(k==='class') e.className=v;
-    else if(k==='html') e.innerHTML=v;
-    else e.setAttribute(k,v);
-  });
-  (Array.isArray(children)?children:[children]).forEach(c=>{
-    if(c==null) return;
-    if(typeof c==='string') e.appendChild(document.createTextNode(c));
-    else e.appendChild(c);
-  });
-  return e;
-}
-
-// Q5=単一選択（隠しフィールドへ反映）
-function renderQ5(){
-  const wrap=document.getElementById('q5_group');
-  SHOPS.forEach(name=>{
-    const id='q5_'+btoa(unescape(encodeURIComponent(name))).replace(/=+$/,'');
-    const r=el('input',{type:'radio',name:'q5_source_r',value:name,id,required:true});
-    r.addEventListener('change',()=>{ document.getElementById('q5_source').value=name; });
-    const label=el('label',{},[r,' ',name]);
-    wrap.appendChild(label);
+function renderRadioGroup(id, list) {
+  const wrap = document.getElementById(id);
+  list.forEach(v => {
+    const lbl = document.createElement('label');
+    const r = document.createElement('input');
+    r.type = 'radio'; r.name = id+'_r'; r.value = v;
+    r.addEventListener('change',()=>document.getElementById('q5_source').value=v);
+    lbl.append(r, ' ', v);
+    wrap.append(lbl);
   });
 }
 
-// Q6/Q7=複数選択 + 「なかった」排他＋グレーアウト
-function renderQx(groupId, name){
-  const wrap=document.getElementById(groupId);
-  const noneValue='なかった';
-  const all=[...SHOPS, noneValue];
-  all.forEach(shop=>{
-    const id=groupId+'_'+btoa(unescape(encodeURIComponent(shop))).replace(/=+$/,'');
-    const chk=el('input',{type:'checkbox',value:shop,id});
-    chk.dataset.role = (shop===noneValue)?'none':'item';
-    const label=el('label',{},[chk,' ',shop]);
-    wrap.appendChild(label);
+function renderCheckGroup(id) {
+  const wrap = document.getElementById(id);
+  SHOPS.forEach(v=>{
+    const lbl=document.createElement('label');
+    const c=document.createElement('input');
+    c.type='checkbox'; c.value=v;
+    lbl.append(c,' ',v);
+    wrap.append(lbl);
   });
-  // クリック制御
   wrap.addEventListener('change',()=>{
     const checks=[...wrap.querySelectorAll('input[type=checkbox]')];
-    const none=checks.find(c=>c.dataset.role==='none');
-    const items=checks.filter(c=>c.dataset.role!=='none');
+    const none=checks.find(c=>c.value==='なかった');
     if(none.checked){
-      items.forEach(c=>{ c.checked=false; c.disabled=true; labelOf(c).style.opacity=.45; });
+      checks.forEach(c=>{ if(c!==none){c.checked=false;c.disabled=true;} });
     }else{
-      items.forEach(c=>{ c.disabled=false; labelOf(c).style.opacity=1; });
+      checks.forEach(c=>c.disabled=false);
     }
   });
-  function labelOf(input){ return input.parentElement; }
 }
 
-// 郵便番号：7桁で打ち止め（非数字除去）
-document.getElementById('zip').addEventListener('input', (e)=>{
-  e.target.value = e.target.value.replace(/\D/g,'').slice(0,7);
+// 郵便番号制限
+document.getElementById('zip').addEventListener('input',e=>{
+  e.target.value=e.target.value.replace(/\D/g,'').slice(0,7);
 });
 
-// 送信処理
-document.getElementById('surveyForm').addEventListener('submit', async (ev)=>{
-  ev.preventDefault();
-  setError('');
+// --- 送信(GET版) ---
+document.getElementById('surveyForm').addEventListener('submit',async ev=>{
+  ev.preventDefault(); setError('');
+  const f=new FormData(ev.target);
+  if(!f.get('q1_gender')||!f.get('q2_age')) return setError('必須項目を入力してください');
+  if(!/^\d{7}$/.test(String(f.get('q3_zip')||''))) return setError('郵便番号は半角7桁');
 
-  // Q5 hiddenへ反映チェック
-  const q5 = document.querySelector('input[name="q5_source_r"]:checked');
-  if(!q5){ return setError('Q5 を選択してください'); }
-  document.getElementById('q5_source').value = q5.value;
+  const q5=document.querySelector('input[name="q5_group_r"]:checked');
+  const q6=getMulti('q6_group'); const q7=getMulti('q7_group');
+  if(q6.length===0) return setError('Q6 を選択してください');
+  if(q7.length===0) return setError('Q7 を選択してください');
 
-  // Q6/Q7 の値を収集（「なかった」優先）
-  const q6vals = collectMulti('q6_group');
-  const q7vals = collectMulti('q7_group');
-  if (q6vals.length===0) return setError('Q6 を選択してください');
-  if (q7vals.length===0) return setError('Q7 を選択してください');
+  const params=new URLSearchParams();
+  params.set('action','submit');
+  params.set('q1_gender',f.get('q1_gender'));
+  params.set('q2_age',f.get('q2_age'));
+  params.set('q3_zip',f.get('q3_zip'));
+  params.set('q4_years',f.get('q4_years'));
+  params.set('q5_source',document.getElementById('q5_source').value);
+  params.set('q6_firstStores',q6.join('|'));
+  params.set('q7_futureStores',q7.join('|'));
+  params.set('q8_free',f.get('q8_free')||'');
 
-  const fd = new FormData(ev.target);
-  // フロントでもバリデーション軽く
-  if(!/^\d{7}$/.test(String(fd.get('q3_zip')||''))) return setError('郵便番号は半角7桁で入力してください');
+  const url=ENDPOINT+'&'+params.toString();
+  const btn=document.getElementById('submitBtn'); btn.disabled=true;
 
-  // Q6/Q7 をまとめて送る（|で連結）
-  fd.delete('q6_firstStores'); fd.delete('q7_futureStores');
-  fd.append('q6_firstStores', q6vals.join('|'));
-  fd.append('q7_futureStores', q7vals.join('|'));
-
-  // 送信
-  const btn = document.getElementById('submitBtn');
-  btn.disabled = true;
   try{
-    const res = await fetch(ENDPOINT + '&action=submit', { method:'POST', body: fd, redirect:'follow' });
-    const js  = await res.json().catch(()=> ({}));
-    // number を厳密チェック
-    if (!js || !js.ok || typeof js.number !== 'number'){
-      console.error('SUBMIT_RESP', js);
-      throw new Error('NO_NUMBER');
+    const res=await fetch(url,{method:'GET',cache:'no-store'});
+    const js=await res.json().catch(()=>({}));
+    if(js.ok && typeof js.number==='number'){
+      sessionStorage.setItem('lastNumber',js.number);
+      showThanks(js.number);
+    }else{
+      throw new Error('送信エラー');
     }
-    sessionStorage.setItem('lastNumber', String(js.number));
-    showThanks(js.number);
-    // URLにも残す（別タブ共有対策）
-    history.replaceState(null,'', location.pathname + '?n=' + encodeURIComponent(js.number));
-  }catch(err){
-    console.error(err);
-    setError('通信エラー：' + String(err && err.message || err));
+  }catch(e){
+    console.error(e);
+    setError('通信エラー：'+e.message);
   }finally{
-    btn.disabled = false;
+    btn.disabled=false;
   }
 });
 
-function collectMulti(groupId){
-  const wrap = document.getElementById(groupId);
-  const checks=[...wrap.querySelectorAll('input[type=checkbox]')];
-  const none = checks.find(c=>c.dataset.role==='none');
-  if (none && none.checked) return ['なかった'];
-  return checks.filter(c=>c.dataset.role!=='none' && c.checked).map(c=>c.value);
+function getMulti(id){
+  const c=[...document.getElementById(id).querySelectorAll('input[type=checkbox]')];
+  const none=c.find(x=>x.value==='なかった');
+  if(none&&none.checked) return ['なかった'];
+  return c.filter(x=>x.checked&&x.value!=='なかった').map(x=>x.value);
 }
 
-function setError(msg){
-  document.getElementById('err').textContent = msg || '';
-}
-
+function setError(msg){document.getElementById('err').textContent=msg;}
 function showThanks(n){
-  const num = (n!=null && /^\d+$/.test(String(n))) ? String(n) : resolveNumber();
-  document.getElementById('respNum').textContent = num || '—';
+  document.getElementById('respNum').textContent=n;
   document.getElementById('formView').classList.add('hide');
   document.getElementById('thanksView').classList.remove('hide');
 }
-function resolveNumber(){
-  const u = new URL(location.href);
-  const urlN = u.searchParams.get('n');
-  if (urlN && /^\d+$/.test(urlN)) return urlN;
-  const ssN = sessionStorage.getItem('lastNumber');
-  if (ssN && /^\d+$/.test(ssN)) return ssN;
-  return '';
-}
-function closeWindow(){
-  try{ window.close(); }catch(_){}
-  if (history.length>1) history.back();
-  else location.replace('about:blank');
-}
+function closeWindow(){window.close();location.replace('about:blank');}
 
-// 初期レンダリング
-renderQ5();
-renderQx('q6_group','q6_firstStores');
-renderQx('q7_group','q7_futureStores');
-
-// もし直接 thanks ページとして開かれたら
-document.addEventListener('DOMContentLoaded', ()=>{
-  const n = new URL(location.href).searchParams.get('n');
-  if (n) showThanks(n);
-});
+// 初期描画
+renderRadioGroup('q5_group',['ポスター','SNS','チラシ','店頭','その他']);
+renderCheckGroup('q6_group'); renderCheckGroup('q7_group');
 </script>
 </body>
 </html>
