@@ -89,7 +89,6 @@
       <fieldset>
         <legend>Q5：本スタンプラリー施策をどちらで知りましたか？ <span class="muted">(必須)</span></legend>
         <div class="group" role="radiogroup" aria-label="周知経路">
-          <!-- （選択肢は省略せずに全て列挙。必要なら後で微調整） -->
           <label><input type="radio" name="q5_source" value="gak" required>gak</label>
           <label><input type="radio" name="q5_source" value="瀬戸田レモンと肉巻き野菜串 NERIMARU">瀬戸田レモンと肉巻き野菜串 NERIMARU</label>
           <label><input type="radio" name="q5_source" value="木の実植物店">木の実植物店</label>
@@ -183,8 +182,7 @@
       <fieldset>
         <legend>Q7：本施策を機に今後通いたい店舗はありましたか？ <span class="muted">(必須／複数選択可)</span></legend>
         <div class="group" id="group-q7">
-          <!-- Q6と同一リスト -->
-          <!-- …（同上、末尾に「なかった」data-none）… -->
+          <!-- 同一リスト（省略せず列挙） -->
           <label><input type="checkbox" name="q7_futureStores" value="gak">gak</label>
           <label><input type="checkbox" name="q7_futureStores" value="瀬戸田レモンと肉巻き野菜串 NERIMARU">瀬戸田レモンと肉巻き野菜串 NERIMARU</label>
           <label><input type="checkbox" name="q7_futureStores" value="木の実植物店">木の実植物店</label>
@@ -260,12 +258,12 @@
     // ★ GASの /exec URL を貼る
     const ENDPOINT = 'https://script.google.com/macros/s/AKfycbxwVxU3Z26dC0uN-iU-eByqBUxLITvrMGeiZizequrhqUvTcJ73V7dIMyUMBTNGJ2Id/exec';
 
-    // ユーティリティ
-    function $(id){ return document.getElementById(id); }
-    function show(el){ el.classList.remove('hidden'); }
-    function hide(el){ el.classList.add('hidden'); }
-    function setBusy(b){ if(b){ show($('loading')); $('submitBtn').disabled=true; } else { hide($('loading')); $('submitBtn').disabled=false; } }
-    function showError(msg){ const box=$('error'); box.textContent=msg||'送信に失敗しました'; show(box); }
+    // util
+    const $ = (id) => document.getElementById(id);
+    const show = (el) => el.classList.remove('hidden');
+    const hide = (el) => el.classList.add('hidden');
+    const setBusy = (b) => { if(b){ show($('loading')); $('submitBtn').disabled=true; } else { hide($('loading')); $('submitBtn').disabled=false; } };
+    const showError = (msg) => { const box=$('error'); box.textContent=msg||'送信に失敗しました'; show(box); };
 
     // 「なかった」排他
     function setupExclusiveNone(groupId, name){
@@ -309,11 +307,10 @@
     });
 
     // 必須：チェックボックス 1つ以上
-    function requireAtLeastOne(name){
-      return Array.from(document.querySelectorAll('input[name="'+name+'"]')).some(b=>b.checked);
-    }
+    const requireAtLeastOne = (name) =>
+      Array.from(document.querySelectorAll('input[name="'+name+'"]')).some(b=>b.checked);
 
-    // 送信
+    // 送信（FormData：プリフライト回避）
     $('form').addEventListener('submit', async (e)=>{
       e.preventDefault();
       hide($('error'));
@@ -327,17 +324,14 @@
       setBusy(true);
 
       const fd = new FormData(e.target);
-      const data = Object.fromEntries(fd.entries());
-      data.q6_firstStores = Array.from(document.querySelectorAll('input[name="q6_firstStores"]:checked')).map(el=>el.value);
-      data.q7_futureStores = Array.from(document.querySelectorAll('input[name="q7_futureStores"]:checked')).map(el=>el.value);
+      // 同名チェックボックスは append で複数送る
+      fd.delete('q6_firstStores');
+      fd.delete('q7_futureStores');
+      for (const el of document.querySelectorAll('input[name="q6_firstStores"]:checked')) fd.append('q6_firstStores', el.value);
+      for (const el of document.querySelectorAll('input[name="q7_futureStores"]:checked')) fd.append('q7_futureStores', el.value);
 
       try{
-        const res = await fetch(ENDPOINT, {
-          method: 'POST',
-          headers: {'Content-Type':'application/json'},
-          body: JSON.stringify(data),
-          // mode: 'cors' // 省略でもOK（デフォルトでcors）
-        });
+        const res = await fetch(ENDPOINT, { method: 'POST', body: fd });
         const json = await res.json().catch(()=>({ ok:false, message:'Invalid JSON' }));
         setBusy(false);
         if(json && json.ok){
