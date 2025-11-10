@@ -23,7 +23,6 @@
   button{appearance:none;border:0;border-radius:9px;background:var(--brand);color:#fff;padding:10px 16px;font-weight:700;cursor:pointer}
   button[disabled]{opacity:.6;cursor:not-allowed}
   .btn-secondary{background:#6b7280}
-  /* 視認性の高い選択肢UI */
   .grid{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
   .pill{display:flex;align-items:center;gap:.5em;border:1px solid var(--line);border-radius:10px;background:#fafafa;padding:8px 10px;cursor:pointer;transition:background .15s,border-color .15s}
   .pill:hover{background:#f5f7ff;border-color:#d8ddff}
@@ -38,10 +37,8 @@
   <div class="card">
     <h1>としまえんあたりのスタンプラリーご参加後アンケート</h1>
 
-    <!-- 入力画面 -->
     <div id="formView">
       <form id="surveyForm" novalidate>
-        <!-- Q1 -->
         <fieldset>
           <h2 class="required">Q1：性別</h2>
           <div class="grid">
@@ -52,7 +49,6 @@
           </div>
         </fieldset>
 
-        <!-- Q2 -->
         <fieldset>
           <h2 class="required">Q2：年代</h2>
           <div class="grid">
@@ -66,14 +62,12 @@
           </div>
         </fieldset>
 
-        <!-- Q3 郵便番号 -->
         <fieldset>
           <h2 class="required">Q3：お住まいの郵便番号</h2>
           <input id="zip" name="q3_zip" inputmode="numeric" pattern="\\d{7}" maxlength="7" minlength="7" required placeholder="例）1760001">
           <div class="help">半角数字7桁。7桁に達したらそれ以上は入力できません。</div>
         </fieldset>
 
-        <!-- Q4 -->
         <fieldset>
           <h2 class="required">Q4：お住まいの居住年数</h2>
           <div class="grid">
@@ -87,7 +81,6 @@
           </div>
         </fieldset>
 
-        <!-- Q5 周知経路（単一選択：店舗・施設一覧 + その他） -->
         <fieldset>
           <h2 class="required">Q5：本スタンプラリー施策をどちらで知りましたか？</h2>
           <div id="q5_group" class="grid"></div>
@@ -95,21 +88,18 @@
           <div class="help">ひとつ選んでください。</div>
         </fieldset>
 
-        <!-- Q6（複数／「なかった」排他） -->
         <fieldset>
           <h2 class="required">Q6：本スタンプラリー施策を機にはじめて行った店舗はありましたか？</h2>
           <div id="q6_group" class="box grid"></div>
           <div class="help">「なかった」を選ぶと他は自動で無効になります。</div>
         </fieldset>
 
-        <!-- Q7（複数／「なかった」排他） -->
         <fieldset>
           <h2 class="required">Q7：本スタンプラリー施策を機に今後通いたい店舗はありましたか？</h2>
           <div id="q7_group" class="box grid"></div>
           <div class="help">「なかった」を選ぶと他は自動で無効になります。</div>
         </fieldset>
 
-        <!-- Q8 任意 -->
         <fieldset>
           <h2>Q8：今後行われたら参加したい地域施策・イベントがあれば教えて下さい（任意）</h2>
           <textarea name="q8_free" rows="5" placeholder="自由記述"></textarea>
@@ -125,7 +115,6 @@
       <div class="alert">※ 送信後、完了画面に回答番号が表示されます。</div>
     </div>
 
-    <!-- 完了画面 -->
     <div id="thanksView" class="hide">
       <h2>ご回答ありがとうございました！</h2>
       <div class="alert">あなたは <b id="respNum">—</b> 番目の回答者です。</div>
@@ -135,13 +124,9 @@
 </div>
 
 <script>
-// ★ここを「googleusercontent の最終URL」に置換（例： https://script.googleusercontent.com/macros/echo?user_content_key=...&lib=... ）
-const ENDPOINT = 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLi42Hv_W0pYRTwYBk52LlDrHiptRMN9aaXSVzKTJjMwwE7zt7dWcqlMXWgOSUKNkpbJIjNaN0i-9p43vLZBOsmUL9--P6y8E80H1Ap-519XFTJ3M5lfvlaJwyNUYFKG1PeFgomMs7deW_u-1GyWH5pM8A9v-NW7180SSLPVIoSzy_LfMxcY8FUVIORjZbg-MAtmB97_-UCIDSeAKY0Z33-J1T8k16wHZqCVkJcYNX0sp-aguevERnZ-6Lm8i0SAYZSHgqncLtXP238kmHuWQq1gzvHdfT7L5ReYCjbkZhih-9ciVeE&lib=MyZphAQ8ILK4SXivHuEv2PojldFBKTi0l';
+// ★ここを「googleusercontent の最終URL」に置換
+const ENDPOINT = 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLhO7lAE_X-fROheboLaNa9MqOkvkiDN9BiCQcRDQ0ENg7CBUCDcZOW5z0t-yOTojjc6Y590ZEJyWpjpbWbw131iRUYfp-hWL4fR3iWNAPbQnhGkOHqAQWvyUXiEVEdS7nB2KdKVX6Bl_K076FIpz3vCV_Udgrkfzzohd3AU3UQxvx7q9hgqoGkwhMeGZLsvmcZ9cI4XUwXSlQlr6THIAnaUkxhGwP4_F3jGklyO0FH0MRDxFOIvy_6BjOFwmUD4_uyx655qFwMUiE8zdN8iuCGH7HgC6IedM0QocpwLW8fdlfpV5J4&lib=MyZphAQ8ILK4SXivHuEv2PojldFBKTi0l';
 
-/** 店舗リスト
- *  Q5 … ご指定の全店舗 + 「その他店舗・施設」
- *  Q6/Q7 … ご指定の全店舗（※「その他店舗・施設」は含めない）+ 「なかった」
- */
 const SHOPS_BASE = [
   'gak','瀬戸田レモンと肉巻き野菜串 NERIMARU','木の実植物店','食堂まほろ','シリウスラボ',
   'セブンイレブン春日町5丁目店','コンビニエンスストア髙橋','わだぱん','佃宝 本店','志村電機珈琲焙煎所',
@@ -152,14 +137,13 @@ const SHOPS_BASE = [
   '111','THE GIANT STEP','アーバンオアシス タナカ','デュアン漢方薬局','かすたねっと',
   '口水食堂','猫カフェ えこねこ','metro dinner.'
 ];
-const SHOPS_Q5 = [...SHOPS_BASE, 'その他店舗・施設'];     // 単一
-const SHOPS_Q6Q7 = [...SHOPS_BASE, 'なかった'];           // 複数（※「その他」は入れない）
+const SHOPS_Q5 = [...SHOPS_BASE, 'その他店舗・施設'];
+const SHOPS_Q6Q7 = [...SHOPS_BASE, 'なかった'];
 
 function makeId(prefix, name){
   return prefix + '_' + btoa(unescape(encodeURIComponent(name))).replace(/=+$/,'');
 }
 
-// Q5（単一） → hiddenへ反映
 (function renderQ5(){
   const wrap=document.getElementById('q5_group');
   SHOPS_Q5.forEach(name=>{
@@ -172,7 +156,6 @@ function makeId(prefix, name){
   });
 })();
 
-// Q6/Q7（複数 + 「なかった」排他）
 function renderCheckGroup(groupId){
   const wrap=document.getElementById(groupId);
   SHOPS_Q6Q7.forEach(name=>{
@@ -183,7 +166,6 @@ function renderCheckGroup(groupId){
     lbl.append(ip, document.createTextNode(' '+name));
     wrap.append(lbl);
   });
-  // 排他 & 視覚グレーアウト
   wrap.addEventListener('change',()=>{
     const checks=[...wrap.querySelectorAll('input[type=checkbox]')];
     const none=checks.find(c=>c.dataset.none==='1');
@@ -198,42 +180,41 @@ function renderCheckGroup(groupId){
 renderCheckGroup('q6_group');
 renderCheckGroup('q7_group');
 
-// 郵便番号：7桁で自動打ち止め
 document.getElementById('zip').addEventListener('input',e=>{
   e.target.value = e.target.value.replace(/\D/g,'').slice(0,7);
 });
 
-// === 送信：画面遷移（CORS完全回避） ===
 document.getElementById('surveyForm').addEventListener('submit', (ev)=>{
   ev.preventDefault(); setError('');
 
   const f = new FormData(ev.target);
   const src = document.getElementById('q5_source').value;
   if(!src) return setError('Q5 を選択してください');
-
   const q6 = collectMulti('q6_group');
   const q7 = collectMulti('q7_group');
   if(q6.length===0) return setError('Q6 を選択してください');
   if(q7.length===0) return setError('Q7 を選択してください');
   if(!/^\d{7}$/.test(String(f.get('q3_zip')||''))) return setError('郵便番号は半角7桁で入力してください');
 
-  const params = new URLSearchParams();
-  params.set('action','submit');
-  params.set('q1_gender', String(f.get('q1_gender')||''));
-  params.set('q2_age',    String(f.get('q2_age')||''));
-  params.set('q3_zip',    String(f.get('q3_zip')||''));
-  params.set('q4_years',  String(f.get('q4_years')||''));
-  params.set('q5_source', src);
-  params.set('q6_firstStores', q6.join('|'));
-  params.set('q7_futureStores', q7.join('|'));
-  params.set('q8_free',  String(f.get('q8_free')||''));
+  const form = document.createElement('form');
+  form.method = 'GET';
+  form.action = ENDPOINT;
+  form.style.display='none';
 
-  // ★ ここがポイント：サーバに「戻り先URL」を渡し、サーバ側で?n=xx を付けてリダイレクト
-  params.set('redirect', encodeURIComponent(location.origin + location.pathname));
+  const add=(k,v)=>{const i=document.createElement('input');i.type='hidden';i.name=k;i.value=v;form.appendChild(i);};
+  add('action','submit');
+  add('q1_gender',String(f.get('q1_gender')||''));
+  add('q2_age',String(f.get('q2_age')||''));
+  add('q3_zip',String(f.get('q3_zip')||''));
+  add('q4_years',String(f.get('q4_years')||''));
+  add('q5_source',src);
+  add('q6_firstStores',q6.join('|'));
+  add('q7_futureStores',q7.join('|'));
+  add('q8_free',String(f.get('q8_free')||''));
+  add('redirect',encodeURIComponent(location.origin + location.pathname));
 
-  const url = ENDPOINT + (ENDPOINT.includes('?')?'&':'?') + params.toString();
-  // 画面遷移で送信（CORS無関係）
-  location.href = url;
+  document.body.appendChild(form);
+  form.submit();
 });
 
 function collectMulti(groupId){
@@ -244,21 +225,20 @@ function collectMulti(groupId){
   return checks.filter(c=>c.checked && c.dataset.none!=='1').map(c=>c.value);
 }
 
-function setError(msg){ document.getElementById('err').textContent = msg || ''; }
+function setError(msg){ document.getElementById('err').textContent=msg||''; }
 
-// ページ再読込（リダイレクト後）：?n=xx があれば完了画面を表示
 (function onLoadThanks(){
-  const n = new URL(location.href).searchParams.get('n');
-  if(n && /^\d+$/.test(n)){
-    document.getElementById('respNum').textContent = n;
+  const n=new URL(location.href).searchParams.get('n');
+  if(n&&/^\d+$/.test(n)){
+    document.getElementById('respNum').textContent=n;
     document.getElementById('formView').classList.add('hide');
     document.getElementById('thanksView').classList.remove('hide');
   }
 })();
 
 function closeWindow(){
-  try{ window.close(); }catch(_){}
-  if(history.length>1) history.back(); else location.replace('about:blank');
+  try{window.close();}catch(_){}
+  if(history.length>1)history.back();else location.replace('about:blank');
 }
 </script>
 </body>
