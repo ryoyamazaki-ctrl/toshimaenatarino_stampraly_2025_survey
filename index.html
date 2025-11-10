@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>としまえんあたりのスタンプラリーご参加後アンケート</title>
+
+  <!-- Safariの強めキャッシュ対策 -->
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
+  <style>
+    :root { --border:#ddd; --muted:#666; --primary:#1a73e8; }
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; line-height: 1.6; margin: 24px; }
+    .card { max-width: 900px; margin: 0 auto; padding: 24px; border: 1px solid var(--border); border-radius: 12px; }
+    h1 { margin: 0 0 16px; text-align: center; }
+    fieldset { border:1px solid var(--border); border-radius:10px; padding:16px; margin:18px 0; }
+    legend { padding: 0 8px; font-weight: 700; }
+    label { margin-right: 16px; }
+    input[type="text"], textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font: inherit; }
+    textarea { min-height: 120px; resize: vertical; }
+    .muted { color: var(--muted); }
+    .center { text-align: center; }
+    .hidden { display: none !important; }
+    button { margin-top: 16px; padding: 10px 16px; border: 0; border-radius: 8px; cursor: pointer; font: inherit; }
+    .primary { background: var(--primary); color: #fff; }
+    .ghost { background: #f6f6f6; }
+    button[disabled] { opacity: .6; cursor: not-allowed; }
+    .success { background: #f1f7ff; border: 1px solid #cfe1ff; padding: 16px; border-radius: 8px; }
+    .error { background: #fff3f3; border: 1px solid #ffd6d6; padding: 16px; border-radius: 8px; color: #b00020; }
+    .group { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px 18px; margin-top: 10px; }
+    .group label { display:flex; align-items:center; gap:8px; }
+    .dim { opacity:.45; pointer-events:none; }
+  </style>
+</head>
+<body>
+  <div class="card" role="region" aria-labelledby="form-title">
+    <h1 id="form-title">としまえんあたりのスタンプラリーご参加後アンケート</h1>
+
+    <form id="form" novalidate>
+      <!-- Q1 性別 -->
+      <fieldset>
+        <legend>Q1：性別 <span class="muted">(必須)</span></legend>
+        <div class="group" role="radiogroup" aria-label="性別">
+          <label><input type="radio" name="q1_gender" value="男性" required>男性</label>
+          <label><input type="radio" name="q1_gender" value="女性">女性</label>
+          <label><input type="radio" name="q1_gender" value="その他">その他</label>
+          <label><input type="radio" name="q1_gender" value="不明">不明</label>
+        </div>
+      </fieldset>
+
+      <!-- Q2 年代 -->
+      <fieldset>
+        <legend>Q2：年代 <span class="muted">(必須)</span></legend>
+        <div class="group" role="radiogroup" aria-label="年代">
+          <label><input type="radio" name="q2_age" value="10代以下" required>10代以下</label>
+          <label><input type="radio" name="q2_age" value="20代">20代</label>
+          <label><input type="radio" name="q2_age" value="30代">30代</label>
+          <label><input type="radio" name="q2_age" value="40代">40代</label>
+          <label><input type="radio" name="q2_age" value="50代">50代</label>
+          <label><input type="radio" name="q2_age" value="60代">60代</label>
+          <label><input type="radio" name="q2_age" value="70代以上">70代以上</label>
+        </div>
+      </fieldset>
+
+      <!-- Q3 郵便番号 -->
+      <fieldset>
+        <legend>Q3：お住まいの郵便番号 <span class="muted">(必須 / 7桁数字のみ)</span></legend>
+        <input id="q3_zip" name="q3_zip" type="text" inputmode="numeric" pattern="\d{7}" maxlength="7" placeholder="例：1760001" required>
+      </fieldset>
+
+      <!-- Q4 居住年数 -->
+      <fieldset>
+        <legend>Q4：お住まいの居住年数 <span class="muted">(必須)</span></legend>
+        <div class="group" role="radiogroup" aria-label="居住年数">
+          <label><input type="radio" name="q4_years" value="1年未満" required>1年未満</label>
+          <label><input type="radio" name="q4_years" value="1年~3年未満">1年~3年未満</label>
+          <label><input type="radio" name="q4_years" value="3年~5年未満">3年~5年未満</label>
+          <label><input type="radio" name="q4_years" value="5年~10年未満">5年~10年未満</label>
+          <label><input type="radio" name="q4_years" value="10年~20年未満">10年~20年未満</label>
+          <label><input type="radio" name="q4_years" value="20年~30年未満">20年~30年未満</label>
+          <label><input type="radio" name="q4_years" value="30年以上">30年以上</label>
+        </div>
+      </fieldset>
+
+      <!-- Q5 周知経路 -->
+      <fieldset>
+        <legend>Q5：本スタンプラリー施策をどちらで知りましたか？ <span class="muted">(必須)</span></legend>
+        <div class="group" role="radiogroup" aria-label="周知経路">
+          <!-- （選択肢は省略せずに全て列挙。必要なら後で微調整） -->
+          <label><input type="radio" name="q5_source" value="gak" required>gak</label>
+          <label><input type="radio" name="q5_source" value="瀬戸田レモンと肉巻き野菜串 NERIMARU">瀬戸田レモンと肉巻き野菜串 NERIMARU</label>
+          <label><input type="radio" name="q5_source" value="木の実植物店">木の実植物店</label>
+          <label><input type="radio" name="q5_source" value="食堂まほろ">食堂まほろ</label>
+          <label><input type="radio" name="q5_source" value="シリウスラボ">シリウスラボ</label>
+          <label><input type="radio" name="q5_source" value="セブンイレブン春日町5丁目店">セブンイレブン春日町5丁目店</label>
+          <label><input type="radio" name="q5_source" value="コンビニエンスストア髙橋">コンビニエンスストア髙橋</label>
+          <label><input type="radio" name="q5_source" value="わだぱん">わだぱん</label>
+          <label><input type="radio" name="q5_source" value="佃宝 本店">佃宝 本店</label>
+          <label><input type="radio" name="q5_source" value="志村電機珈琲焙煎所">志村電機珈琲焙煎所</label>
+          <label><input type="radio" name="q5_source" value="手打ちそばと酒肴 いちだい">手打ちそばと酒肴 いちだい</label>
+          <label><input type="radio" name="q5_source" value="練馬城址公園">練馬城址公園</label>
+          <label><input type="radio" name="q5_source" value="Bis">Bis</label>
+          <label><input type="radio" name="q5_source" value="トシママンガスタンド">トシママンガスタンド</label>
+          <label><input type="radio" name="q5_source" value="スタジオツアー東京">スタジオツアー東京</label>
+          <label><input type="radio" name="q5_source" value="SNIP*SNIP">SNIP*SNIP</label>
+          <label><input type="radio" name="q5_source" value="titi cafe">titi cafe</label>
+          <label><input type="radio" name="q5_source" value="豊島園 庭の湯">豊島園 庭の湯</label>
+          <label><input type="radio" name="q5_source" value="バールウギャッデ">バールウギャッデ</label>
+          <label><input type="radio" name="q5_source" value="としまえん 多喜">としまえん 多喜</label>
+          <label><input type="radio" name="q5_source" value="日本酒処 はち屋">日本酒処 はち屋</label>
+          <label><input type="radio" name="q5_source" value="笑天やきとり 一輝">笑天やきとり 一輝</label>
+          <label><input type="radio" name="q5_source" value="練馬区立 向山庭園">練馬区立 向山庭園</label>
+          <label><input type="radio" name="q5_source" value="タッポスト チャオラ">タッポスト チャオラ</label>
+          <label><input type="radio" name="q5_source" value="夢民家">夢民家</label>
+          <label><input type="radio" name="q5_source" value="兄弟チキン">兄弟チキン</label>
+          <label><input type="radio" name="q5_source" value="亀寿司">亀寿司</label>
+          <label><input type="radio" name="q5_source" value="BBQ Records">BBQ Records</label>
+          <label><input type="radio" name="q5_source" value="カーサ・デル・ヴィアッジアトーレ">カーサ・デル・ヴィアッジアトーレ</label>
+          <label><input type="radio" name="q5_source" value="豊島園の夕陽">豊島園の夕陽</label>
+          <label><input type="radio" name="q5_source" value="111">111</label>
+          <label><input type="radio" name="q5_source" value="THE GIANT STEP">THE GIANT STEP</label>
+          <label><input type="radio" name="q5_source" value="アーバンオアシス タナカ">アーバンオアシス タナカ</label>
+          <label><input type="radio" name="q5_source" value="デュアン漢方薬局">デュアン漢方薬局</label>
+          <label><input type="radio" name="q5_source" value="かすたねっと">かすたねっと</label>
+          <label><input type="radio" name="q5_source" value="口水食堂">口水食堂</label>
+          <label><input type="radio" name="q5_source" value="猫カフェ えこねこ">猫カフェ えこねこ</label>
+          <label><input type="radio" name="q5_source" value="metro dinner.">metro dinner.</label>
+          <label><input type="radio" name="q5_source" value="その他店舗・施設">その他店舗・施設</label>
+        </div>
+      </fieldset>
+
+      <!-- Q6 はじめて行った店舗（「なかった」排他） -->
+      <fieldset>
+        <legend>Q6：本施策を機にはじめて行った店舗はありましたか？ <span class="muted">(必須／複数選択可)</span></legend>
+        <div class="group" id="group-q6">
+          <!-- 省略せず全店舗 -->
+          <label><input type="checkbox" name="q6_firstStores" value="gak">gak</label>
+          <label><input type="checkbox" name="q6_firstStores" value="瀬戸田レモンと肉巻き野菜串 NERIMARU">瀬戸田レモンと肉巻き野菜串 NERIMARU</label>
+          <label><input type="checkbox" name="q6_firstStores" value="木の実植物店">木の実植物店</label>
+          <label><input type="checkbox" name="q6_firstStores" value="食堂まほろ">食堂まほろ</label>
+          <label><input type="checkbox" name="q6_firstStores" value="シリウスラボ">シリウスラボ</label>
+          <label><input type="checkbox" name="q6_firstStores" value="セブンイレブン春日町5丁目店">セブンイレブン春日町5丁目店</label>
+          <label><input type="checkbox" name="q6_firstStores" value="コンビニエンスストア髙橋">コンビニエンスストア髙橋</label>
+          <label><input type="checkbox" name="q6_firstStores" value="わだぱん">わだぱん</label>
+          <label><input type="checkbox" name="q6_firstStores" value="佃宝 本店">佃宝 本店</label>
+          <label><input type="checkbox" name="q6_firstStores" value="志村電機珈琲焙煎所">志村電機珈琲焙煎所</label>
+          <label><input type="checkbox" name="q6_firstStores" value="手打ちそばと酒肴 いちだい">手打ちそばと酒肴 いちだい</label>
+          <label><input type="checkbox" name="q6_firstStores" value="練馬城址公園">練馬城址公園</label>
+          <label><input type="checkbox" name="q6_firstStores" value="Bis">Bis</label>
+          <label><input type="checkbox" name="q6_firstStores" value="トシママンガスタンド">トシママンガスタンド</label>
+          <label><input type="checkbox" name="q6_firstStores" value="スタジオツアー東京">スタジオツアー東京</label>
+          <label><input type="checkbox" name="q6_firstStores" value="SNIP*SNIP">SNIP*SNIP</label>
+          <label><input type="checkbox" name="q6_firstStores" value="titi cafe">titi cafe</label>
+          <label><input type="checkbox" name="q6_firstStores" value="豊島園 庭の湯">豊島園 庭の湯</label>
+          <label><input type="checkbox" name="q6_firstStores" value="バールウギャッデ">バールウギャッデ</label>
+          <label><input type="checkbox" name="q6_firstStores" value="としまえん 多喜">としまえん 多喜</label>
+          <label><input type="checkbox" name="q6_firstStores" value="日本酒処 はち屋">日本酒処 はち屋</label>
+          <label><input type="checkbox" name="q6_firstStores" value="笑天やきとり 一輝">笑天やきとり 一輝</label>
+          <label><input type="checkbox" name="q6_firstStores" value="練馬区立 向山庭園">練馬区立 向山庭園</label>
+          <label><input type="checkbox" name="q6_firstStores" value="タッポスト チャオラ">タッポスト チャオラ</label>
+          <label><input type="checkbox" name="q6_firstStores" value="夢民家">夢民家</label>
+          <label><input type="checkbox" name="q6_firstStores" value="兄弟チキン">兄弟チキン</label>
+          <label><input type="checkbox" name="q6_firstStores" value="亀寿司">亀寿司</label>
+          <label><input type="checkbox" name="q6_firstStores" value="BBQ Records">BBQ Records</label>
+          <label><input type="checkbox" name="q6_firstStores" value="カーサ・デル・ヴィアッジアトーレ">カーサ・デル・ヴィアッジアトーレ</label>
+          <label><input type="checkbox" name="q6_firstStores" value="豊島園の夕陽">豊島園の夕陽</label>
+          <label><input type="checkbox" name="q6_firstStores" value="111">111</label>
+          <label><input type="checkbox" name="q6_firstStores" value="THE GIANT STEP">THE GIANT STEP</label>
+          <label><input type="checkbox" name="q6_firstStores" value="アーバンオアシス タナカ">アーバンオアシス タナカ</label>
+          <label><input type="checkbox" name="q6_firstStores" value="デュアン漢方薬局">デュアン漢方薬局</label>
+          <label><input type="checkbox" name="q6_firstStores" value="かすたねっと">かすたねっと</label>
+          <label><input type="checkbox" name="q6_firstStores" value="口水食堂">口水食堂</label>
+          <label><input type="checkbox" name="q6_firstStores" value="猫カフェ えこねこ">猫カフェ えこねこ</label>
+          <label><input type="checkbox" name="q6_firstStores" value="metro dinner.">metro dinner.</label>
+          <label><input type="checkbox" name="q6_firstStores" value="なかった" data-none>なかった</label>
+        </div>
+      </fieldset>
+
+      <!-- Q7 今後通いたい店舗（「なかった」排他） -->
+      <fieldset>
+        <legend>Q7：本施策を機に今後通いたい店舗はありましたか？ <span class="muted">(必須／複数選択可)</span></legend>
+        <div class="group" id="group-q7">
+          <!-- Q6と同一リスト -->
+          <!-- …（同上、末尾に「なかった」data-none）… -->
+          <label><input type="checkbox" name="q7_futureStores" value="gak">gak</label>
+          <label><input type="checkbox" name="q7_futureStores" value="瀬戸田レモンと肉巻き野菜串 NERIMARU">瀬戸田レモンと肉巻き野菜串 NERIMARU</label>
+          <label><input type="checkbox" name="q7_futureStores" value="木の実植物店">木の実植物店</label>
+          <label><input type="checkbox" name="q7_futureStores" value="食堂まほろ">食堂まほろ</label>
+          <label><input type="checkbox" name="q7_futureStores" value="シリウスラボ">シリウスラボ</label>
+          <label><input type="checkbox" name="q7_futureStores" value="セブンイレブン春日町5丁目店">セブンイレブン春日町5丁目店</label>
+          <label><input type="checkbox" name="q7_futureStores" value="コンビニエンスストア髙橋">コンビニエンスストア髙橋</label>
+          <label><input type="checkbox" name="q7_futureStores" value="わだぱん">わだぱん</label>
+          <label><input type="checkbox" name="q7_futureStores" value="佃宝 本店">佃宝 本店</label>
+          <label><input type="checkbox" name="q7_futureStores" value="志村電機珈琲焙煎所">志村電機珈琲焙煎所</label>
+          <label><input type="checkbox" name="q7_futureStores" value="手打ちそばと酒肴 いちだい">手打ちそばと酒肴 いちだい</label>
+          <label><input type="checkbox" name="q7_futureStores" value="練馬城址公園">練馬城址公園</label>
+          <label><input type="checkbox" name="q7_futureStores" value="Bis">Bis</label>
+          <label><input type="checkbox" name="q7_futureStores" value="トシママンガスタンド">トシママンガスタンド</label>
+          <label><input type="checkbox" name="q7_futureStores" value="スタジオツアー東京">スタジオツアー東京</label>
+          <label><input type="checkbox" name="q7_futureStores" value="SNIP*SNIP">SNIP*SNIP</label>
+          <label><input type="checkbox" name="q7_futureStores" value="titi cafe">titi cafe</label>
+          <label><input type="checkbox" name="q7_futureStores" value="豊島園 庭の湯">豊島園 庭の湯</label>
+          <label><input type="checkbox" name="q7_futureStores" value="バールウギャッデ">バールウギャッデ</label>
+          <label><input type="checkbox" name="q7_futureStores" value="としまえん 多喜">としまえん 多喜</label>
+          <label><input type="checkbox" name="q7_futureStores" value="日本酒処 はち屋">日本酒処 はち屋</label>
+          <label><input type="checkbox" name="q7_futureStores" value="笑天やきとり 一輝">笑天やきとり 一輝</label>
+          <label><input type="checkbox" name="q7_futureStores" value="練馬区立 向山庭園">練馬区立 向山庭園</label>
+          <label><input type="checkbox" name="q7_futureStores" value="タッポスト チャオラ">タッポスト チャオラ</label>
+          <label><input type="checkbox" name="q7_futureStores" value="夢民家">夢民家</label>
+          <label><input type="checkbox" name="q7_futureStores" value="兄弟チキン">兄弟チキン</label>
+          <label><input type="checkbox" name="q7_futureStores" value="亀寿司">亀寿司</label>
+          <label><input type="checkbox" name="q7_futureStores" value="BBQ Records">BBQ Records</label>
+          <label><input type="checkbox" name="q7_futureStores" value="カーサ・デル・ヴィアッジアトーレ">カーサ・デル・ヴィアッジアトーレ</label>
+          <label><input type="checkbox" name="q7_futureStores" value="豊島園の夕陽">豊島園の夕陽</label>
+          <label><input type="checkbox" name="q7_futureStores" value="111">111</label>
+          <label><input type="checkbox" name="q7_futureStores" value="THE GIANT STEP">THE GIANT STEP</label>
+          <label><input type="checkbox" name="q7_futureStores" value="アーバンオアシス タナカ">アーバンオアシス タナカ</label>
+          <label><input type="checkbox" name="q7_futureStores" value="デュアン漢方薬局">デュアン漢方薬局</label>
+          <label><input type="checkbox" name="q7_futureStores" value="かすたねっと">かすたねっと</label>
+          <label><input type="checkbox" name="q7_futureStores" value="口水食堂">口水食堂</label>
+          <label><input type="checkbox" name="q7_futureStores" value="猫カフェ えこねこ">猫カフェ えこねこ</label>
+          <label><input type="checkbox" name="q7_futureStores" value="metro dinner.">metro dinner.</label>
+          <label><input type="checkbox" name="q7_futureStores" value="なかった" data-none>なかった</label>
+        </div>
+      </fieldset>
+
+      <!-- Q8 自由記述 -->
+      <fieldset>
+        <legend>Q8：今後行われたら参加したい地域施策・イベントがあれば教えて下さい（任意）</legend>
+        <textarea id="q8_free" name="q8_free" placeholder="自由記述"></textarea>
+      </fieldset>
+
+      <div class="center">
+        <button class="primary" type="submit" id="submitBtn">送信する</button>
+        <div id="loading" class="hidden muted" role="status" aria-live="polite" style="margin-top:8px;">送信中です…</div>
+      </div>
+    </form>
+
+    <div id="error" class="hidden error" role="alert" style="margin-top:12px;"></div>
+
+    <div id="result" class="hidden" aria-live="polite" style="margin-top:16px;">
+      <div class="success">
+        <h2 style="margin-top:0;">ご回答ありがとうございました！</h2>
+        <p id="numberLine" style="font-size:1.2rem;font-weight:700;"></p>
+        <p class="muted" id="timeLine"></p>
+      </div>
+      <div class="center" style="margin-top:12px;">
+        <button type="button" id="closeBtn" class="ghost">ページを閉じる</button>
+        <div id="closeHelp" class="muted hidden" style="margin-top:8px;">
+          ウィンドウが閉じない場合は、タブを手動で閉じてください。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ★ GASの /exec URL を貼る
+    const ENDPOINT = 'https://script.google.com/macros/s/AKfycbxwVxU3Z26dC0uN-iU-eByqBUxLITvrMGeiZizequrhqUvTcJ73V7dIMyUMBTNGJ2Id/exec';
+
+    // ユーティリティ
+    function $(id){ return document.getElementById(id); }
+    function show(el){ el.classList.remove('hidden'); }
+    function hide(el){ el.classList.add('hidden'); }
+    function setBusy(b){ if(b){ show($('loading')); $('submitBtn').disabled=true; } else { hide($('loading')); $('submitBtn').disabled=false; } }
+    function showError(msg){ const box=$('error'); box.textContent=msg||'送信に失敗しました'; show(box); }
+
+    // 「なかった」排他
+    function setupExclusiveNone(groupId, name){
+      const group = $(groupId);
+      if(!group) return;
+      const boxes = Array.from(group.querySelectorAll('input[name="'+name+'"]'));
+      const none = boxes.find(b => b.getAttribute('data-none') !== null);
+      function update(){
+        const anyOther = boxes.some(b => b!==none && b.checked);
+        if(none && none.checked){
+          boxes.forEach(b => { if(b!==none){ b.checked=false; b.disabled=true; b.parentElement.classList.add('dim'); }});
+        } else if(anyOther){
+          if(none) none.checked=false;
+          boxes.forEach(b => { if(b!==none){ b.disabled=false; b.parentElement.classList.remove('dim'); }});
+        } else {
+          boxes.forEach(b => { if(b!==none){ b.disabled=false; b.parentElement.classList.remove('dim'); }});
+        }
+      }
+      boxes.forEach(b => b.addEventListener('change', update));
+      update();
+    }
+    setupExclusiveNone('group-q6', 'q6_firstStores');
+    setupExclusiveNone('group-q7', 'q7_futureStores');
+
+    // 郵便番号：数字のみ7桁
+    const zipInput = $('q3_zip');
+    function enforceZip(){
+      const d = (zipInput.value||'').replace(/\D+/g,'').slice(0,7);
+      if(zipInput.value!==d) zipInput.value=d;
+    }
+    zipInput.addEventListener('input', enforceZip);
+    zipInput.addEventListener('paste', (e)=>{
+      e.preventDefault();
+      const text = (e.clipboardData||window.clipboardData).getData('text')||'';
+      const digits = text.replace(/\D+/g,'').slice(0,7);
+      const start = zipInput.selectionStart, end = zipInput.selectionEnd;
+      const v = zipInput.value;
+      zipInput.value = (v.slice(0,start)+digits+v.slice(end)).slice(0,7);
+      const caret = Math.min(start+digits.length,7);
+      zipInput.setSelectionRange(caret, caret);
+    });
+
+    // 必須：チェックボックス 1つ以上
+    function requireAtLeastOne(name){
+      return Array.from(document.querySelectorAll('input[name="'+name+'"]')).some(b=>b.checked);
+    }
+
+    // 送信
+    $('form').addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      hide($('error'));
+      enforceZip();
+
+      const zip = zipInput.value.trim();
+      if(!requireAtLeastOne('q6_firstStores')) { showError('Q6 は少なくとも1つ選択してください。'); return; }
+      if(!requireAtLeastOne('q7_futureStores')) { showError('Q7 は少なくとも1つ選択してください。'); return; }
+      if(!/^\d{7}$/.test(zip)) { showError('Q3 郵便番号は7桁の数字で入力してください。'); return; }
+
+      setBusy(true);
+
+      const fd = new FormData(e.target);
+      const data = Object.fromEntries(fd.entries());
+      data.q6_firstStores = Array.from(document.querySelectorAll('input[name="q6_firstStores"]:checked')).map(el=>el.value);
+      data.q7_futureStores = Array.from(document.querySelectorAll('input[name="q7_futureStores"]:checked')).map(el=>el.value);
+
+      try{
+        const res = await fetch(ENDPOINT, {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify(data),
+          // mode: 'cors' // 省略でもOK（デフォルトでcors）
+        });
+        const json = await res.json().catch(()=>({ ok:false, message:'Invalid JSON' }));
+        setBusy(false);
+        if(json && json.ok){
+          $('form').classList.add('hidden');
+          $('result').classList.remove('hidden');
+          $('numberLine').textContent = 'あなたは ' + json.number + ' 番目の回答者です。';
+          if(json.timestamp){
+            const dt = new Date(json.timestamp);
+            $('timeLine').textContent = isNaN(dt.getTime()) ? '' : ('受信時刻：' + dt.toLocaleString());
+          } else {
+            $('timeLine').textContent = '';
+          }
+        } else {
+          showError((json && json.message) || '送信に失敗しました。');
+        }
+      }catch(err){
+        setBusy(false);
+        showError('通信エラー：' + String(err));
+      }
+    });
+
+    // 「ページを閉じる」：最大限のフォールバック
+    async function attemptClose(){
+      try{ if(history.length>1){ history.back(); await new Promise(r=>setTimeout(r,250)); if(document.visibilityState==='hidden') return; } }catch(_){}
+      const tries = [
+        ()=>{ window.top && window.top.close && window.top.close(); },
+        ()=>{ window.close(); },
+        ()=>{ window.open('','_self'); window.close(); },
+        ()=>{ try{ self.opener=null; }catch(_){ } window.open('','_self'); window.close(); }
+      ];
+      for(const t of tries){
+        try{ t(); }catch(_){}
+        await new Promise(r=>setTimeout(r,200));
+        if(document.visibilityState==='hidden') return;
+      }
+      try{ location.replace('about:blank'); }catch(_){}
+      $('closeHelp').classList.remove('hidden');
+    }
+    $('closeBtn').addEventListener('click', attemptClose);
+  </script>
+</body>
+</html>
