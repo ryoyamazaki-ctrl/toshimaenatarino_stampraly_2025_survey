@@ -13,18 +13,20 @@
 </style>
 </head>
 <body>
-<h1>通信診断（GitHub Pages → GAS /exec）</h1>
+<h1>通信診断（GitHub Pages → GAS）</h1>
 
 <div class="row">
-  <label>ENDPOINT（GAS /exec のURL）:
-    <input id="endpoint" type="url" placeholder="https://script.google.com/macros/s/xxxx/exec" size="60" required>
+  <label>ENDPOINT（GASのURL）:
+    <input id="endpoint" type="url" placeholder="https://script.googleusercontent.com/...（最終URL）" size="70" required>
   </label>
   <button id="save">保存</button>
 </div>
 
 <div class="row">
-  <button id="testGet">① GET /ping を試す</button>
-  <button id="testPost">② POST(FormData) を試す</button>
+  <button id="testGet">① GET /ping</button>
+  <button id="postFD">② POST FormData</button>
+  <button id="postQS">③ POST URLSearchParams</button>
+  <button id="postJSON">④ POST JSON</button>
   <button id="clear">結果クリア</button>
 </div>
 
@@ -43,10 +45,9 @@ const get = (k)=>localStorage.getItem(k)||'';
 })();
 
 $('save').addEventListener('click', ()=>{ set('diag_endpoint',$('endpoint').value.trim()); log('✔ ENDPOINT 保存: '+$('endpoint').value.trim()); });
-
 $('clear').addEventListener('click', ()=>{ $('out').textContent=''; });
 
-$('testGet').addEventListener('click', async ()=>{
+async function testGET(){
   const ENDPOINT = $('endpoint').value.trim();
   if(!ENDPOINT){ alert('ENDPOINT を入力してください'); return; }
   $('out').textContent='';
@@ -59,26 +60,25 @@ $('testGet').addEventListener('click', async ()=>{
     log('type: '+res.type+' | redirected:'+res.redirected+' | url:'+res.url);
     const text = await res.text();
     log('body:\n'+text);
-    try{ const js = JSON.parse(text); log('JSON parse OK: '+JSON.stringify(js)); }catch(_){ log('JSON parse: NG（テキストとして受信）'); }
+    try{ const js = JSON.parse(text); log('JSON parse OK: '+JSON.stringify(js)); }catch(_){ log('JSON parse: NG（テキスト）'); }
     log('--- GET /ping 終了 ---');
   }catch(err){
     log('✖ Failed to fetch: '+String(err));
   }
-});
+}
 
-$('testPost').addEventListener('click', async ()=>{
+async function postFormData(){
   const ENDPOINT = $('endpoint').value.trim();
   if(!ENDPOINT){ alert('ENDPOINT を入力してください'); return; }
   log('--- POST(FormData) を開始 ---');
   try{
     const fd = new FormData();
-    // 最小限の項目（サーバ側バリデーションに合わせる）
     fd.append('q1_gender','不明');
     fd.append('q2_age','30代');
-    fd.append('q3_zip','1760001'); // 7桁
+    fd.append('q3_zip','1760001');
     fd.append('q4_years','1年未満');
     fd.append('q5_source','gak');
-    fd.append('q6_firstStores','gak');     // 同名キーは複数可だが1つでOK
+    fd.append('q6_firstStores','gak');
     fd.append('q7_futureStores','なかった');
     fd.append('q8_free','(diag)');
 
@@ -87,12 +87,71 @@ $('testPost').addEventListener('click', async ()=>{
     log('type: '+res.type+' | redirected:'+res.redirected+' | url:'+res.url);
     const text = await res.text();
     log('body:\n'+text);
-    try{ const js = JSON.parse(text); log('JSON parse OK: '+JSON.stringify(js)); }catch(_){ log('JSON parse: NG（テキストとして受信）'); }
-    log('--- POST 終了 ---');
+    try{ const js = JSON.parse(text); log('JSON parse OK: '+JSON.stringify(js)); }catch(_){ log('JSON parse: NG'); }
+    log('--- POST(FormData) 終了 ---');
   }catch(err){
     log('✖ Failed to fetch: '+String(err));
   }
-});
+}
+
+async function postQS(){
+  const ENDPOINT = $('endpoint').value.trim();
+  if(!ENDPOINT){ alert('ENDPOINT を入力してください'); return; }
+  log('--- POST(URLSearchParams) を開始 ---');
+  try{
+    const qp = new URLSearchParams();
+    qp.set('q1_gender','不明');
+    qp.set('q2_age','30代');
+    qp.set('q3_zip','1760001');
+    qp.set('q4_years','1年未満');
+    qp.set('q5_source','gak');
+    qp.append('q6_firstStores','gak');      // 同名キーは append で複数に対応
+    qp.append('q7_futureStores','なかった');
+    qp.set('q8_free','(diag)');
+
+    // ★ Content-Type は “自動で” application/x-www-form-urlencoded が付きます（ヘッダは自分で付けない！）
+    const res = await fetch(ENDPOINT, { method:'POST', body: qp, cache:'no-store', redirect:'follow', referrerPolicy:'no-referrer' });
+    log('status: '+res.status+' '+res.statusText);
+    log('type: '+res.type+' | redirected:'+res.redirected+' | url:'+res.url);
+    const text = await res.text();
+    log('body:\n'+text);
+    try{ const js = JSON.parse(text); log('JSON parse OK: '+JSON.stringify(js)); }catch(_){ log('JSON parse: NG'); }
+    log('--- POST(URLSearchParams) 終了 ---');
+  }catch(err){
+    log('✖ Failed to fetch: '+String(err));
+  }
+}
+
+async function postJSON(){
+  const ENDPOINT = $('endpoint').value.trim();
+  if(!ENDPOINT){ alert('ENDPOINT を入力してください'); return; }
+  log('--- POST(JSON) を開始 ---');
+  try{
+    const body = {
+      q1_gender:'不明', q2_age:'30代', q3_zip:'1760001', q4_years:'1年未満',
+      q5_source:'gak', q6_firstStores:['gak'], q7_futureStores:['なかった'], q8_free:'(diag)'
+    };
+    const res = await fetch(ENDPOINT, {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json' }, // ← プリフライトが走る。通らない環境の見極め用
+      body: JSON.stringify(body),
+      cache:'no-store', redirect:'follow', referrerPolicy:'no-referrer'
+    });
+    log('status: '+res.status+' '+res.statusText);
+    log('type: '+res.type+' | redirected:'+res.redirected+' | url:'+res.url);
+    const text = await res.text();
+    log('body:\n'+text);
+    try{ const js = JSON.parse(text); log('JSON parse OK: '+JSON.stringify(js)); }catch(_){ log('JSON parse: NG'); }
+    log('--- POST(JSON) 終了 ---');
+  }catch(err){
+    log('✖ Failed to fetch: '+String(err));
+  }
+}
+
+$('testGet').addEventListener('click', testGET);
+$('postFD').addEventListener('click', postFormData);
+$('postQS').addEventListener('click', postQS);
+$('postJSON').addEventListener('click', postJSON);
 </script>
 </body>
 </html>
